@@ -1,0 +1,613 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+
+<title>
+  都道府県クイズ
+</title>
+
+
+<style>
+body {
+	font-family: "メイリオ", meiryo, sans-serif;
+	}
+div {
+	font-size: x-large;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+
+//↑div内のフォントを指定しておく。
+
+//ここから変数を先に指定していく
+
+let total_q_number=47; //全問題の種類数
+let total_number=10; //出題問題数を指定
+var ratio; //正解の割合を示す
+var time;//掛かった時間を計るのに使う
+var q_number=0; //解き終わった問題は何問あるか（この変数+1が今何問目かを示す）
+var question; //問題文
+var select1; //選択肢1
+var select2; //選択肢2
+var select3; //選択肢3
+var select4; //選択肢4
+var correct;//正解は何番か（問題によって変化させる）
+var answer; //解答は何番を選んだか（ボタンを押したら変化させる）
+var compliment; //結果へのコメント
+var c_number=0; //正解数
+var order=Array(total_number); //出題問題数だけ数字のある配列を作成する。
+order.fill(0); //orderの配列の数字を全て0にする。
+var k=0;
+
+//これ以降が問題文になる。
+
+//else if(order[q_number]==2){　⇒　order配列の[問題番号]番目が2の場合
+        //question="<u><strong>鹿児島県</strong></u>の県庁所在地はどこでしょうか?";　⇒問題文をこの分に
+        //select1="○○○";　⇒選択肢１を○○○に
+        //select2="○○○";　⇒選択肢２を○○○に
+        //select3="○○○";　⇒選択肢３を○○○に
+        //select4="○○○";　⇒選択肢４を○○○に
+        //correct="数字";　⇒正解の選択肢
+
+
+function select_question(){
+    if(order[q_number]==1){
+        question="<u><strong>沖縄県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="那覇市";
+        select2="名護市";
+        select3="沖縄市";
+        select4="石垣市";
+        correct="1";
+    }
+    else if(order[q_number]==2){
+        question="<u><strong>鹿児島県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="鹿屋市";
+        select2="鹿児島市";
+        select3="出水市";
+        select4="薩摩川内市";
+        correct="2";
+    }
+    else if(order[q_number]==3){
+        question="<u><strong>宮崎県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="日向市";
+        select2="延岡市";
+        select3="宮崎市";
+        select4="日南市";
+        correct="3";
+    }
+    else if(order[q_number]==4){
+        question="<u><strong>熊本県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="八代市";
+        select2="水俣市";
+        select3="阿蘇市";
+        select4="熊本市";
+        correct="4";
+    }
+    else if(order[q_number]==5){
+        question="<u><strong>大分県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="大分市";
+        select2="別府市";
+        select3="佐伯市";
+        select4="中津市";
+        correct="1";
+    }
+    else if(order[q_number]==6){
+        question="<u><strong>福岡県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="久留米市";
+        select2="福岡市";
+        select3="飯塚市";
+        select4="北九州市";
+        correct="2";
+    }
+    else if(order[q_number]==7){
+        question="<u><strong>佐賀県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="鳥栖市";
+        select2="唐津市";
+        select3="佐賀市";
+        select4="伊万里市";
+        correct="3";
+    }
+    else if(order[q_number]==8){
+        question="<u><strong>長崎県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="壱岐市";
+        select2="対馬市";
+        select3="佐世保市";
+        select4="長崎市";
+        correct="4";
+    }
+    else if(order[q_number]==9){
+        question="<u><strong>高知県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="高知市";
+        select2="土佐市";
+        select3="四万十市";
+        select4="須崎市";
+        correct="1";
+    }
+    else if(order[q_number]==10){
+        question="<u><strong>徳島県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="鳴門市";
+        select2="徳島市";
+        select3="阿波市";
+        select4="吉野川市";
+        correct="2";
+    }
+    else if(order[q_number]==11){
+        question="<u><strong>香川県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="松山市";
+        select2="丸亀市";
+        select3="高松市";
+        select4="香川市";
+        correct="3";
+    }
+    else if(order[q_number]==12){
+        question="<u><strong>愛媛県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="今治市";
+        select2="高松市";
+        select3="愛媛市";
+        select4="松山市";
+        correct="4";
+    }
+    else if(order[q_number]==13){
+        question="<u><strong>山口県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="山口市";
+        select2="下関市";
+        select3="萩市";
+        select4="防府市";
+        correct="1";
+    }
+    else if(order[q_number]==14){
+        question="<u><strong>広島県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="呉市";
+        select2="広島市";
+        select3="尾道市";
+        select4="福山市";
+        correct="2";
+    }
+    else if(order[q_number]==15){
+        question="<u><strong>岡山県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="備前市";
+        select2="倉敷市";
+        select3="岡山市";
+        select4="瀬戸内市";
+        correct="3";
+    }
+    else if(order[q_number]==16){
+        question="<u><strong>鳥取県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="米子市";
+        select2="倉吉市";
+        select3="境港市";
+        select4="鳥取市";
+        correct="4";
+    }
+    else if(order[q_number]==17){
+        question="<u><strong>和歌山県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="和歌山市";
+        select2="有田市";
+        select3="新宮市";
+        select4="海南市";
+        correct="1";
+    }
+    else if(order[q_number]==18){
+        question="<u><strong>奈良県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="橿原市";
+        select2="奈良市";
+        select3="天理市";
+        select4="生駒市";
+        correct="2";
+    }
+    else if(order[q_number]==19){
+        question="<u><strong>兵庫県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="兵庫市";
+        select2="淡路市";
+        select3="神戸市";
+        select4="姫路市";
+        correct="3";
+    }
+    else if(order[q_number]==20){
+        question="<u><strong>大阪府</strong></u>の府庁所在地はどこでしょうか?";
+        select1="堺市";
+        select2="東大阪市";
+        select3="羽曳野市";
+        select4="大阪市";
+        correct="4";
+    }
+    else if(order[q_number]==21){
+        question="<u><strong>京都府</strong></u>の府庁所在地はどこでしょうか?";
+        select1="京都市";
+        select2="福知山市";
+        select3="舞鶴市";
+        select4="宇治市";
+        correct="1";
+    }
+    else if(order[q_number]==22){
+        question="<u><strong>滋賀県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="滋賀市";
+        select2="大津市";
+        select3="津市";
+        select4="草津市";
+        correct="2";
+    }
+    else if(order[q_number]==23){
+        question="<u><strong>三重県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="三重市";
+        select2="伊勢市";
+        select3="津市";
+        select4="大津市";
+        correct="3";
+    }
+    else if(order[q_number]==24){
+        question="<u><strong>愛知県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="豊田市";
+        select2="豊橋市";
+        select3="愛知市";
+        select4="名古屋市";
+        correct="4";
+    }
+    else if(order[q_number]==25){
+        question="<u><strong>静岡県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="静岡市";
+        select2="浜松市";
+        select3="熱海市";
+        select4="伊豆市";
+        correct="1";
+    }
+    else if(order[q_number]==26){
+        question="<u><strong>岐阜県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="美濃市";
+        select2="岐阜市";
+        select3="高山市";
+        select4="飛騨市";
+        correct="2";
+    }
+    else if(order[q_number]==27){
+        question="<u><strong>長野県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="松本市";
+        select2="上田市";
+        select3="長野市";
+        select4="飯山市";
+        correct="3";
+    }
+    else if(order[q_number]==28){
+        question="<u><strong>山梨県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="甲斐市";
+        select2="山梨市";
+        select3="南アルプス市";
+        select4="甲府市";
+        correct="4";
+    }
+    else if(order[q_number]==29){
+        question="<u><strong>福井県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="福井市";
+        select2="敦賀市";
+        select3="越前市";
+        select4="鯖江市";
+        correct="1";
+    }
+    else if(order[q_number]==30){
+        question="<u><strong>石川県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="石川市";
+        select2="金沢市";
+        select3="加賀市";
+        select4="小松市";
+        correct="2";
+    }
+    else if(order[q_number]==31){
+        question="<u><strong>富山県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="黒部市";
+        select2="氷見市";
+        select3="富山市";
+        select4="砺波市";
+        correct="3";
+    }
+    else if(order[q_number]==32){
+        question="<u><strong>新潟県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="新発田市";
+        select2="長岡市";
+        select3="上越市";
+        select4="新潟市";
+        correct="4";
+    }
+    else if(order[q_number]==33){
+        question="<u><strong>神奈川県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="横浜市";
+        select2="川崎市";
+        select3="鎌倉市";
+        select4="神奈川市";
+        correct="1";
+    }
+    else if(order[q_number]==34){
+        question="<u><strong>東京都</strong></u>の都庁所在地はどこでしょうか?";
+        select1="品川区";
+        select2="新宿区";
+        select3="東京区";
+        select4="渋谷区";
+        correct="2";
+    }
+    else if(order[q_number]==35){
+        question="<u><strong>千葉県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="木更津市";
+        select2="柏市";
+        select3="千葉市";
+        select4="船橋市";
+        correct="3";
+    }
+    else if(order[q_number]==36){
+        question="<u><strong>埼玉県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="川口市";
+        select2="埼玉市";
+        select3="川越市";
+        select4="さいたま市";
+        correct="4";
+    }
+    else if(order[q_number]==37){
+        question="<u><strong>群馬県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="前橋市";
+        select2="群馬市";
+        select3="高崎市";
+        select4="伊勢崎市";
+        correct="1";
+    }
+    else if(order[q_number]==38){
+        question="<u><strong>栃木県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="栃木市";
+        select2="宇都宮市";
+        select3="足利市";
+        select4="日光市";
+        correct="2";
+    }
+    else if(order[q_number]==39){
+        question="<u><strong>茨城県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="ひたちなか市";
+        select2="つくば市";
+        select3="水戸市";
+        select4="茨城市";
+        correct="3";
+    }
+    else if(order[q_number]==40){
+        question="<u><strong>福島県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="郡山市";
+        select2="会津若松市";
+        select3="いわき市";
+        select4="福島市";
+        correct="4";
+    }
+    else if(order[q_number]==41){
+        question="<u><strong>山形県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="山形市";
+        select2="米沢市";
+        select3="天童市";
+        select4="鶴岡市";
+        correct="1";
+    }
+    else if(order[q_number]==42){
+        question="<u><strong>秋田県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="横手市";
+        select2="秋田市";
+        select3="男鹿市";
+        select4="北秋田市";
+        correct="2";
+    }
+    else if(order[q_number]==43){
+        question="<u><strong>宮城県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="石巻市";
+        select2="仙台市";
+        select3="宮城市";
+        select4="気仙沼市";
+        correct="2";
+    }
+    else if(order[q_number]==44){
+        question="<u><strong>岩手県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="遠野市";
+        select2="岩手市";
+        select3="盛岡市";
+        select4="花巻市";
+        correct="3";
+    }
+    else if(order[q_number]==45){
+        question="<u><strong>青森県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="つがる市";
+        select2="むつ市";
+        select3="八戸市";
+        select4="青森市";
+        correct="4";
+    }
+    else if(order[q_number]==46){
+        question="<u><strong>北海道</strong></u>の道庁所在地はどこでしょうか?";
+        select1="札幌市";
+        select2="石狩市";
+        select3="夕張市";
+        select4="函館市";
+        correct="1";
+    }
+    else if(order[q_number]==47){
+        question="<u><strong>島根県</strong></u>の県庁所在地はどこでしょうか?";
+        select1="高松市";
+        select2="松江市";
+        select3="出雲市";
+        select4="島根市";
+        correct="2";
+    }
+}
+
+//関数を定義していく。
+
+//↓snswer変数（答えを指定）をその問題に応じたものに変える関数
+
+function cor1(){
+    answer="1";
+    discri_answer();
+}
+function cor2(){
+    answer="2";
+    discri_answer();
+}
+function cor3(){
+    answer="3";
+    discri_answer();
+}
+function cor4(){
+    answer="4";
+    discri_answer();
+}
+
+//ボタンを押した後の反応（正解不正解＆指定した問題数に達したかで分岐をさせている。）
+function discri_answer() {
+    column = document.getElementById("output");
+    if(correct == answer && q_number != total_number-1){ //正解かつ今の問題がラスト一問ではない時
+        column.innerHTML = "<strong><font size='5' color='#ff0000'>選択肢[" + correct + "]　正解！！</font></strong> <input id='next_but' type='button' value='クリックして次へ進もう' onclick='next();'/><br><br>";
+        //「選択肢[?]　正解！！」と赤字で表示。　「クリックして次へ進もう」ボタンを表示。押すと next関数へ。
+        c_number++; //正解数を増やす
+        columnq = document.getElementById("c_num");
+        columnq.innerHTML = c_number;
+    }
+    else if(correct != answer && q_number != total_number-1){ //不正解かつ今の問題がラスト一問ではない時
+        column.innerHTML = "<strong><font size='5' color='#0000ff'>残念！！正解は[" + correct + "]</font></strong> <input id='next_but' type='button' value='クリックして次へ進もう' onclick='next();'/><br><br>";
+    }
+    else if(correct == answer && q_number == total_number-1){ //正解かつ今の問題がラスト一問だった時
+        c_number++; //正解数を増やす
+        ratio=c_number/total_number*100; 
+        //正解の割合
+        ratio=ratio.toFixed();
+        //正解の割合を小数第一位で四捨五入する。　　toFixed() ⇒ ()内の数字だけ小数点以下を残して四捨五入する。
+        time=(Date.now()-time)/1000;
+        //今の時間-スタート時の時間＝問題を解いていた時間
+        compliment="";
+        //以下、正解の割合に応じた結果の表示　
+        if(ratio<=25){
+            compliment="<font color='#000077' size='10'><i>もっと頑張れ</i></font>";
+        }
+        else if(ratio>25 && ratio<=70){
+            compliment="<font color='#005500' size='10'><i>微妙・・・</i></font>";
+        }
+        else if(ratio>70 && ratio<=99){
+            compliment="<font color='#ff4500' size='10'><i>＊better luck next time＊</i></font>";
+        }
+        else if(ratio>99){
+            compliment="<font color='#880000' size='10'><i>excellent!!すばらしいです！</i></font>";
+        }
+        else{
+            compliment="さらに研鑽を積もう";
+        }
+        column.innerHTML = "<strong><font size='5' color='#ff0000'>選択肢[" + correct + "]　正解！！</font> <font size='5'>全問終了!!お疲れさまでした。</font></strong><br><br><font size='5'>かかった時間は<strong>" + time + "秒</strong>　正答率は" + c_number + "/" + total_number + "=<strong>" + ratio + "％</strong>でした</font><br><br><strong>" + compliment + "</strong><br><br><input id='next_but' type='button' value='もう一度挑戦する' onclick='reflesh();'/><br><br><input id='next_but' type='button' value='前のページに戻る' onclick='last();'/><br><br>";
+        columnq = document.getElementById("c_num");
+        columnq.innerHTML = c_number;
+    }
+    else if(correct != answer && q_number == total_number-1){ //不正解かつ今の問題がラスト一問だった時
+        ratio=c_number/total_number*100; 
+        //正解の割合
+        ratio=ratio.toFixed(2)
+        time=(Date.now()-time)/1000;
+        compliment="";
+        if(ratio<=25){
+            compliment="<font color='#000077' size='10'><i>もっと頑張れ</i></font>";
+        }
+        else if(ratio>25 && ratio<=70){
+            compliment="<font color='#005500' size='10'><i>微妙・・・</i></font>";
+        }
+        else if(ratio>70 && ratio<=99){
+            compliment="<font color='#ff4500' size='10'><i>＊better luck next time＊</i></font>";
+        }
+        else if(ratio>99){
+            compliment="<font color='#880000' size='10'><i>excellent!!すばらしいです！</i></font>";
+        }
+        else{
+            compliment="さらに研鑽を積もう";
+        }
+        column.innerHTML = "<strong><font size='5' color='#0000ff'>残念！！正解は[" + correct + "]</font> <font size='5'>全問終了!!お疲れさまでした。</font></strong><br><br><font size='5'>かかった時間は<strong>" + time + "秒</strong>　正答率は" + c_number + "/" + total_number + "=<strong>" + ratio + "％</strong>でした</font><br><br><strong>" + compliment + "</strong><br><br><input id='next_but' type='button' value='もう一度挑戦する' onclick='reflesh();'/><br><br><input id='next_but' type='button' value='前のページに戻る' onclick='last();'/><br><br>";
+    }
+    //disabled⇒無効にする属性　　結果を表示する際、ボタンは押せなくしておくということ。
+    document.getElementById("but1").disabled = true;
+    document.getElementById("but2").disabled = true;
+    document.getElementById("but3").disabled = true;
+    document.getElementById("but4").disabled = true;
+}
+
+//リフレッシュ関数＝ページをリロードする。
+function reflesh(){
+    window.location.reload();
+}
+
+//ラスト関数＝ブラウザバックする。
+function last(){
+    window.history.back();
+}
+
+//次の問題に行くとき
+function next() {
+    q_number++; //解き終わった問題を一問増やす
+    column = document.getElementById("output");
+    column.innerHTML = "";
+    //disabled⇒無効にする属性　　結果を表示する時に無効にしたボタンを再度有効にする
+    document.getElementById("but1").disabled = false;
+    document.getElementById("but2").disabled = false;
+    document.getElementById("but3").disabled = false;
+    document.getElementById("but4").disabled = false;
+    select_question() //問題選択関数を動かす。
+    if(q_number!=total_number){
+        columnq = document.getElementById("q_num"); //「?問中　?問目　正解数? 」 という表示。
+        columnq.innerHTML = q_number+1;
+    }
+
+    //最初に表示しているものと同じもの（問題とボタン）を表示する。 IDで呼び出している。
+    columnq = document.getElementById("quest");
+    columnq.innerHTML = question;
+    column1 = document.getElementById("but1");
+    column1.value = "[1]　" + select1;
+    column2 = document.getElementById("but2");
+    column2.value = "[2]　" + select2;
+    column3 = document.getElementById("but3");
+    column3.value = "[3]　" + select3;
+    column4 = document.getElementById("but4");
+    column4.value = "[4]　" + select4;
+}
+
+//どの問題を出すかを決める　　　order配列の何問目か番目の数字が問題番号になっている。
+//order配列の[出題問題数-1]番目=0 かつ kが100以下の場合以下の処理を繰り返す。
+while(order[total_number-1] == 0 && k<100){
+    r=Math.floor(Math.random() * total_q_number + 1);
+    //Math.floor(X)⇒X以下の最大の整数を返す。　Math.rondom()⇒0以上1以下の乱数を返す。
+    //これでrが1以上総問題数以下の乱数になる。
+    for(let j=0; j<total_number; j++){ //for (最初だけ実行する初期化式; 当てはまらなくなるまで動く条件式; 毎周回ごと実行される変化式)
+        if(order[j]==r){ //order配列のj番目(最初は0,次は1,)の数字がr（総問題数以下のランダムな整数）だったらこの関数を終える。
+            break;
+        }
+        if(order[j]==0){ //order配列のj番目が0(=１問目)なら、order配列の0番目の数字をr（総問題数以下のランダムな整数）にしてこの関数を終える。
+            order[j]=r;
+            break;
+        }
+    }
+    k=k+1;
+}
+if(k==100){
+    for(let i=0; i<total_number; i++){
+        order[i]=i+1;
+    }
+}
+
+//ここから最初に表示されるもの
+qu_number=q_number+1; //今何問目かを定義
+select_question(); //問題が選ばれる関数
+document.open(); //ドキュメントの書き込みを開始する。
+document.write(total_number + "問中　<span id='q_num'>" + qu_number + "</span>問目　正解数<span id='c_num'>" + c_number + "</span>");
+//「?問中　?問目　正解数? 」 という表示。 
+document.write("<p><div id='quest'>" + question + "　</div></p><br>");
+document.write("<div id='output'></div>");
+//以下4択ボタン
+//クリックしたらcor関数を呼び出して、answer変数を変化させる。　'but?'というIDでこの性質を保存している。
+document.write("<input id='but1' type='button' style='text-align: left; width:75%;font-size:20px;' value=[1]　" + select1 + " onclick='cor1();'/><br><br>");
+document.write("<input id='but2' type='button' style='text-align: left; width:75%;font-size:20px;' value=[2]　" + select2 + " onclick='cor2();'/><br><br>");
+document.write("<input id='but3' type='button' style='text-align: left; width:75%;font-size:20px;' value=[3]　" + select3 + " onclick='cor3();'/><br><br>");
+document.write("<input id='but4' type='button' style='text-align: left; width:75%;font-size:20px;' value=[4]　" + select4 + " onclick='cor4();'/><br><br>");
+document.close(); //ドキュメントの書き込みを終了する。
+time=Date.now(); //スタート時の時間を取得する。
+  
+  </script>
+
+</body>
+
+</html>
