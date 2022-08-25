@@ -1,0 +1,628 @@
+# dantyotei.github.io
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+<title>みんはや的なクイズ</title>
+
+<style>
+
+body {
+    font-family: "メイリオ", meiryo, sans-serif;
+    background-color: rgba(226, 226, 226, 0.6);
+    margin: 0;
+    font-size: 25px;
+    background-size: cover;
+}
+
+.correct {
+    background-color: rgba(216, 255, 194, 0.6);
+}
+.incorrect {
+    background-color: rgba(255, 194, 194, 0.6);
+}
+
+
+#question {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    box-shadow: 0 5px 5px rgb(232, 232, 232);
+    text-align: center;
+    font-size:35px;
+}
+
+#header {
+    content: "";
+    display: block;
+    clear: both;
+    font-size:30px;
+}
+#point {
+    float: left;
+    padding: 0 0 0 10px;
+}
+#time {
+    float: right;
+    padding: 0 10px 0 0;
+}
+
+#QuestionResult {
+    display: flex;
+    text-align:center;
+    justify-content: center;
+    font-weight:bold;
+    font-size:25px;
+    height: 40px;
+    margin: 10px;
+}
+
+
+#button {
+    justify-content: center;
+    text-align: center;
+}
+
+#but1 {
+    padding: 5px 5px;
+    font-size:70px;
+    font-weight: 600;
+    text-shadow: 1px 2px 1px rgb(168, 168, 168);
+    border-radius: 6px;
+    justify-content: center;
+    margin: 5px;
+    width:18%;
+    color: #FFF;
+    background-color : #f13a3a;
+    border: 1px solid #eadffc;
+    }
+#but1:hover {
+    background-color : #c93333;
+}
+
+#but2 {
+    padding: 5px 5px;
+    font-size:70px;
+    font-weight: 600;
+    text-shadow: 1px 2px 1px rgb(168, 168, 168);
+    border-radius: 6px;
+    justify-content: center;
+    margin: 5px;
+    width:18%;
+    color: #FFF;
+    background-color : #4114f6;
+    border: 1px solid #eadffc;
+}
+#but2:hover {
+    background-color : #3511c2;
+}
+
+#but3 {
+    padding: 5px 5px;
+    font-size:70px;
+    font-weight: 600;
+    text-shadow: 1px 2px 1px rgb(168, 168, 168);
+    border-radius: 6px;
+    justify-content: center;
+    margin: 5px ;
+    width:18%;
+    color: #FFF;
+    background-color : #f6ef14;
+    border: 1px solid #eadffc;
+}
+#but3:hover {
+    background-color : #dfd814;
+}
+
+#but4 {
+    padding: 5px 5px;
+    font-size:70px;
+    font-weight: 600;
+    text-shadow: 1px 2px 1px rgb(168, 168, 168);
+    border-radius: 6px;
+    justify-content: center;
+    margin: 5px;
+    width:18%;
+    color: #FFF;
+    background-color : #14f650;
+    border: 1px solid #eadffc;
+}
+#but4:hover {
+    background-color : #10bd3e;
+}
+
+#but5 {
+    padding: 5px 5px;
+    font-size:70px;
+    font-weight: 600;
+    text-shadow: 1px 2px 1px rgb(168, 168, 168);
+    border-radius: 6px;
+    justify-content: center;
+    margin: 5px;
+    width:18%;
+    color: #FFF;
+    background-color : #14dcf6;
+    border: 1px solid #eadffc;
+}
+#but5:hover {
+    background-color : #11a2b5;
+}
+
+.end {
+    opacity: 0.5;
+}
+
+#start {
+    width:50%;
+    height:50%;
+    padding: 5px 5px;
+    font-size:100px;
+    font-weight: 600;
+    text-shadow: 1px 2px 1px rgb(168, 168, 168);
+    border-radius: 6px;
+    justify-content: center;
+    margin: 5px;
+    color: #FFF;
+    background-color : #7df614;
+    border: 1px solid #eadffc;
+}
+#start:hover {
+    background-color : #5bb30e;
+}
+#reload {
+    width:30%;
+    padding: 5px 5px;
+    font-size:20px;
+    font-weight: 100;
+    border-radius: 6px;
+    justify-content: center;
+    margin: 5px;
+    color: #FFF;
+    background-color : #ae14f6;
+    border: 1px solid #eadffc;
+}
+#reload:hover {
+    background-color : #9c14db;
+}
+
+#volume {
+    margin: 0 auto 0 auto;
+    justify-content: center;
+    display: flex;
+}
+#volumeset {
+    margin: 0 10px 0 auto;
+    justify-content: center;
+    display: flex;
+}
+#evaluation {
+    margin: 0 10px 0 auto;
+    justify-content: right;
+    display: flex;
+}
+
+
+
+</style>
+</head>
+
+
+<body id="all">
+
+<div id="header">　
+    <div id="point">0点</div>
+    <div id="time">残り60秒</div>
+</div>
+<div id="question">問題文です。</div>
+<div id="QuestionResult"></div>
+<img id="image_place" class="Picture" src="1.jpg">
+<div id="button">
+<button type="button" id="but1" class="ChoiceNow1" onclick="but1()">1</button>
+<button type="button" id="but2" class="ChoiceNow2" onclick="but2()">2</button>
+<button type="button" id="but3" class="ChoiceNow3" onclick="but3()">3</button>
+<button type="button" id="but4" class="ChoiceNow4" onclick="but4()">4</button>
+<button type="button" id="but5" class="ChoiceNow5" onclick="but5()">5</button>
+<button type="button" id="start" onclick="start()">スタート</button>
+<button type="button" id="reload" onclick="reload()">もう一回チャレンジ</button>
+</div>
+<div id="volumeset">BGM音量</div>
+<input type="range" id="volume" value="0.5" min="0.0" max="1.0" step="0.1">
+<div id="evaluation"></div>
+
+<audio id="correct_audio">
+    <source src="正解.mp3" type="audio/mp3">
+</audio>
+<audio id="incorrect_audio">
+    <source src="不正解.mp3" type="audio/mp3">
+</audio>
+<audio id="but_audio">
+    <source src="決定音.mp3" type="audio/mp3">
+</audio>
+<audio id="end_audio">
+    <source src="終了.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+var picture =0;
+var total_q_number =5;//総問題数
+var q_number;//問題番号
+var answered_number = 0;//答え終わった問題数
+var score=0;//得点
+var l_number;
+var correct_place;
+var correct_letter;
+var select1;
+var select2;
+var select3;
+var select4;
+var select5;
+var time;
+var now_letter_number =0;
+var All_letter="あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽゃゅょぁぃぅぇぉっあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
+var bgm = new Audio("BGM.mp3");
+var bgm_volume;
+var i =0;
+
+
+function audio_c() {
+    document.getElementById('correct_audio').currentTime = 0; //連続クリックに対応
+    document.getElementById('correct_audio').play(); //クリックしたら音を再生
+}
+function audio_ic() {
+    document.getElementById('incorrect_audio').currentTime = 0; //連続クリックに対応
+    document.getElementById('incorrect_audio').play(); //クリックしたら音を再生
+}
+
+function audio_but() {
+    document.getElementById('but_audio').currentTime = 0; //連続クリックに対応
+    document.getElementById('but_audio').play(); //クリックしたら音を再生
+}
+function audio_end() {
+    
+    if(i<2){
+        document.getElementById('end_audio').play(); 
+        i++;
+    }
+    else {
+        document.getElementById('end_audio').pause(); 
+    }
+}
+
+
+function select_question(){
+    q_number=Math.floor(Math.random() * total_q_number + 1);
+    now_letter_number=0
+
+    if(q_number==1){
+        question="江戸幕府を開いたのは？";
+        correct="とくがわいえやす";
+        picture="0"
+    }
+    else if(q_number==2){
+        question="五月雨を何と読む?";
+        correct="さみだれ";
+        picture="0"
+    }
+    else if(q_number==3){
+        question="みかんの白いすじを何という?";
+        correct="あるべど";
+        picture="0"
+    }
+    else if(q_number==4){
+        question="世界三大珍味といえば、キャビア、トリュフと何?";
+        correct="ふぉあぐら";
+        picture="0"
+    }
+    else if(q_number==5){
+        question="面積が一番小さい都道府県は?";
+        correct="かがわ";
+        picture="0"
+    }
+    
+}
+
+function letter_in(){
+    document.getElementById('but1').innerHTML = letterA
+    document.getElementById('but2').innerHTML = letterB
+    document.getElementById('but3').innerHTML = letterC
+    document.getElementById('but4').innerHTML = letterD
+    document.getElementById('but5').innerHTML = letterE
+}
+
+
+function inner_button(){
+    correct_place=Math.floor(Math.random() * 5 + 1);
+
+    correct_letter=correct.charAt(now_letter_number);
+    letterA=All_letter.charAt(Math.random() * 125 + 1);
+    letterB=All_letter.charAt(Math.random() * 125 + 1);
+    letterC=All_letter.charAt(Math.random() * 125 + 1);
+    letterD=All_letter.charAt(Math.random() * 125 + 1);
+    letterE=All_letter.charAt(Math.random() * 125 + 1);
+
+
+    if(correct_place<=1){      
+        letterA=correct_letter
+        letter_in();
+    }
+    else if(1<correct_place && correct_place<=2){
+        letterB=correct_letter
+        letter_in();
+    }
+    else if(2<correct_place && correct_place<=3){
+        letterC=correct_letter
+        letter_in();
+    }
+    else if(3<correct_place && correct_place<=4){
+        letterD=correct_letter
+        letter_in();
+    }
+    else {
+        letterE=correct_letter
+        letter_in();
+    }
+}
+
+
+function but1(){
+    now_letter_number++;
+
+    if (letterA!=correct_letter){
+        document.getElementById('QuestionResult').innerHTML = "不正解…　正解は「 " + correct + " 」"
+        document.getElementById("all").classList.add("incorrect");
+        audio_ic();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700);
+        inner_button();
+    }
+    else if (letterA==correct_letter && correct.length > now_letter_number){
+        audio_but();
+        inner_button();
+    }
+    else if(letterA==correct_letter && correct.length == now_letter_number){
+        score = score + correct.length
+        document.getElementById('point').innerHTML = score + "点"
+        document.getElementById('QuestionResult').innerHTML = "正解！"
+        document.getElementById("all").classList.add("correct");
+        audio_c();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700)
+        inner_button();
+    }
+}
+function but2(){
+    now_letter_number++;
+
+    if (letterB!=correct_letter){
+        document.getElementById('QuestionResult').innerHTML = "不正解…　正解は「 " + correct + " 」"
+        document.getElementById("all").classList.add("incorrect");
+        audio_ic();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700)
+        inner_button();
+    }
+    else if (letterB==correct_letter && correct.length > now_letter_number){
+        audio_but();
+        inner_button();
+    }
+    else if(letterB==correct_letter && correct.length == now_letter_number){
+        score = score + correct.length
+        document.getElementById('point').innerHTML = score + "点"
+        document.getElementById('QuestionResult').innerHTML = "正解！"
+        document.getElementById("all").classList.add("correct");
+        audio_c();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700)
+        inner_button();
+    }
+}
+function but3(){
+    now_letter_number++;
+    if (letterC!=correct_letter){
+        document.getElementById('QuestionResult').innerHTML = "不正解…　正解は「 " + correct + " 」"
+        document.getElementById("all").classList.add("incorrect");
+        audio_ic();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700)
+        inner_button();
+    }
+    else if (letterC==correct_letter && correct.length > now_letter_number){
+        audio_but();
+        inner_button();
+    }
+    else if(letterC==correct_letter && correct.length == now_letter_number){
+        score = score + correct.length
+        document.getElementById('point').innerHTML = score + "点"
+        document.getElementById('QuestionResult').innerHTML = "正解！"
+        document.getElementById("all").classList.add("correct");
+        audio_c();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700)
+        inner_button();
+    }
+}
+function but4(){
+    now_letter_number++;
+    if (letterD!=correct_letter){
+        document.getElementById('QuestionResult').innerHTML = "不正解…　正解は「 " + correct + " 」"
+        document.getElementById("all").classList.add("incorrect");
+        audio_ic();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700)
+        inner_button();
+    }
+    else if (letterD==correct_letter && correct.length > now_letter_number){
+        audio_but();
+        inner_button();
+    }
+    else if(letterD==correct_letter && correct.length == now_letter_number){
+        score = score + correct.length
+        document.getElementById('point').innerHTML = score + "点"
+        document.getElementById('QuestionResult').innerHTML = "正解！"
+        document.getElementById("all").classList.add("correct");
+        audio_c();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700)
+        inner_button();
+    }
+}
+function but5(){
+    now_letter_number++;
+
+    if (letterE!=correct_letter){
+        document.getElementById('QuestionResult').innerHTML = "不正解…　正解は「 " + correct + " 」"
+        document.getElementById("all").classList.add("incorrect");
+        audio_ic();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700)
+        inner_button();
+    }
+    else if (letterE==correct_letter && correct.length > now_letter_number){
+        audio_but();
+        inner_button();
+    }
+    else if(letterE==correct_letter && correct.length == now_letter_number){
+        score = score + correct.length
+        document.getElementById('point').innerHTML = score + "点"
+        document.getElementById('QuestionResult').innerHTML = "正解！"
+        document.getElementById("all").classList.add("correct");
+        audio_c();
+        setTimeout(bc_normal,700)
+        select_question();
+        document.getElementById('question').innerHTML = question
+        setTimeout(next_question,700)
+        inner_button();
+    }
+}
+
+function bc_normal(){
+    document.getElementById("all").classList.remove("correct");
+    document.getElementById("all").classList.remove("incorrect");
+}
+
+function next_question(){
+    document.getElementById('question').innerHTML = question
+    document.getElementById('QuestionResult').innerHTML = ""
+}
+
+function start(){
+    document.getElementById('QuestionResult').innerHTML = ""
+
+    document.getElementById("but1").style.display ="";
+    document.getElementById("but2").style.display ="";
+    document.getElementById("but3").style.display ="";
+    document.getElementById("but4").style.display ="";
+    document.getElementById("but5").style.display ="";
+    document.getElementById("start").style.display ="none";
+    document.getElementById("evaluation").style.display ="none";
+
+    document.getElementById("volume").style.display ="none";
+    document.getElementById("volumeset").style.display ="none";
+    bgm_volume = document.getElementById('volume');
+    bgm.volume = bgm_volume.value;
+    bgm.play();
+
+    document.getElementById('question').innerHTML = question
+    select_question();
+    inner_button();
+    next_question();
+    timerstart()
+}  
+
+function end(){
+    document.getElementById("but1").disabled = true;
+    document.getElementById("but2").disabled = true;
+    document.getElementById("but3").disabled = true;
+    document.getElementById("but4").disabled = true;
+    document.getElementById("but5").disabled = true;
+
+    document.getElementById("but1").classList.add("end");
+    document.getElementById("but2").classList.add("end");
+    document.getElementById("but3").classList.add("end");
+    document.getElementById("but4").classList.add("end");
+    document.getElementById("but5").classList.add("end");
+
+    bgm.pause();
+    audio_end();
+    document.getElementById("reload").style.display ="";
+    document.getElementById('QuestionResult').innerHTML = "時間切れ…　正解は「 " + correct + " 」"
+    
+    open_score();
+
+}
+
+function open_score(){
+
+
+
+    if (score >= high_score){
+        localStorage.setItem('high_score', score);
+        high_score = score;
+
+        document.getElementById("evaluation").style.display ="";
+        document.getElementById("evaluation").innerHTML =  "最高得点更新！" + high_score + "点になりました^^";
+    }
+    else {
+        document.getElementById("evaluation").style.display ="";
+        document.getElementById("evaluation").innerHTML =  "最高得点は" + high_score + "点です。";
+    }
+    
+}
+
+function reload() {
+    window.location.reload();
+}
+
+function showtime() {
+    time--;
+    if(time<0){
+        end();
+        document.getElementById("time").innerHTML = "終了！"
+    }
+    else{
+        document.getElementById("time").innerHTML = "残り" + time + "秒"
+    }
+}
+
+function timerstart() {
+    time = 60;// カウンタのリセット
+    setInterval('showtime()',1000); // タイマーをセット(1000ms間隔)
+}
+
+bgm.loop = 'true';
+
+var high_score = localStorage.getItem('high_score');
+
+
+document.getElementById('question').innerHTML = "制限時間は60秒！頑張って！"
+
+document.getElementById("image_place").style.display ="none";
+document.getElementById("but1").style.display ="none";
+document.getElementById("but2").style.display ="none";
+document.getElementById("but3").style.display ="none";
+document.getElementById("but4").style.display ="none";
+document.getElementById("but5").style.display ="none";
+document.getElementById("reload").style.display ="none";
+document.getElementById("evaluation").innerHTML =  "最近の最高得点は" + high_score + "点です。";
+
+</script>
+</body>
+</html>
